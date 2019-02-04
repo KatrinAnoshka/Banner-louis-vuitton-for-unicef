@@ -16,6 +16,12 @@ img {
     overflow: hidden;
     background: #f9f9f9 url(img/frame.jpg) no-repeat;
 }
+#wrect {
+    width: inherit;
+    height: inherit;
+    background: #f9f9f9;
+    pointer-events: none;
+}
 #bg {
     width: inherit;
     height: inherit;
@@ -81,6 +87,7 @@ img {
 }
 .text {
     font-size: 22px;   
+    font-family: 'Roboto Slab', serif;
     font-weight: bold;
     color: rgb(0, 174, 239);
     line-height: 1.273;
@@ -114,6 +121,13 @@ img {
     position: absolute;
     left: 15px;
     bottom:15px;
+    -webkit-transition: background 0.3s, color 0.3s;
+    transition: background 0.3s, color 0.3s;
+    transition-timing-function: ease-in-out;
+}
+#cta:hover {
+    background: #bd281d;
+    color: #fff;
 }
 
 /*************** Right-side ***************/
@@ -123,7 +137,7 @@ img {
     height: 100%;
     right: 0;
 }
-.spot {
+#spot {
     width: 450px;
     height: 100%;
     right: 55px;
@@ -157,6 +171,7 @@ img {
 }
 #hashtag {
     font-size: 48px;
+    font-family: 'Roboto Slab', serif;
     color: rgb(255, 255, 255);
     line-height: 1.2;
     right: 70px;

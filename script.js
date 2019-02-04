@@ -57,8 +57,8 @@
             
             ctx.save();
                 ctx.translate(w/2, h/2);
-                ctx.scale(0.18, 0.18);
-                ctx.drawImage(image, -image.width/0.45, -10);
+                ctx.scale(0.8, 0.8);
+                ctx.drawImage(image, -image.width/2.3, -8);
             ctx.restore();
             //ctx.drawImage(images.pic, 0, 0);
         }
@@ -80,9 +80,11 @@
             },
             tl = new TimelineMax(),
             wrapper = select('#wrapper'),
+            wrect = select('#wrect'),
             logo = select('#logoWrap'),
             canvas = select('#canvas'),
             bg = select('#bg'),
+            spot = select('#spot'),
             spotColor = select('#spotColor'),
             logoColor = selectAll('.logoColor'),
             logoText = select('#logoText'),
@@ -91,50 +93,58 @@
             paintedhands1 = select('#paintedHands1'),
             realhands = select('#realHands'),
             cta = select('#cta'),
-            text1 = select('#text1'),
-            text2 = select('#text2'),
-            text3 = select('#text3');            
+            // text1 = select('#text1'),
+            text1 = selectAll('#text1 > span'),
+            text2 = selectAll('#text2 > span'),
+            text3 = selectAll('#text3 > span');            
 
         animate();
-
-        TweenMax.delayedCall(18.6, function(){
-            for(var i = 0; i < uno.length; i++) {
-                uno[i].style.webkitAnimationPlayState = 'paused';
-                dos[i].style.webkitAnimationPlayState = 'paused';
-                tres[i].style.webkitAnimationPlayState = 'paused';
-                cuatro[i].style.webkitAnimationPlayState = 'paused';
-            }
-        })
         
         TweenMax.from(canvas, 10, {y:"-=200", ease:Back.easeOut});
         
-        TweenMax.fromTo(canvas, 2, {rotation:2, transformOrigin:"50% -100px"}, {rotation:-2, ease:Power2.easeInOut, yoyo:true, repeat:4, onComplete:function(){
-            TweenMax.to(canvas, 2, {rotation:0, transformOrigin:"50% -100px", ease:Power2.easeInOut});
+        TweenMax.fromTo(canvas, 2, {rotation:2, transformOrigin:"50% -100px"}, {
+            rotation:-2, ease:Power2.easeInOut, yoyo:true, repeat:4, onComplete:function(){
+                TweenMax.to(canvas, 2, {rotation:0, transformOrigin:"50% -100px", ease:Power2.easeInOut});
         }});
-
+        // TweenMax.to(canvas, 10, {x:"0", ease:Back.easeOut});
         function animate() {
           
             tl
-        
-            .from(logo, 1.9, {alpha:0, y:"-=100", ease:Linear.easeNone})           
-            .to(text1, 0.8, {opacity:1, ease:Power4.easeIn}, "+=0.1")
-            .from(cta, 0.8, {alpha:0, y:"+=80", ease:Linear.easeNone}, "-=1")
-            .to(canvas, 0.8, {opacity:0}, "+=2.2")
-            .to(text1, 0.8, {opacity:0}, "-=0.8")
-            .to(text2, 0.8, {opacity:1, ease:Power4.easeIn}, "+=0.05")
-            .to(paintedhands, 0.8, {opacity:1, ease:Power4.easeIn}, "-=0.8")
-            .to(paintedhands, 0.8, {opacity:0}, "+=0.5")
-            .to(paintedhands1, 0.8, {opacity:1, ease:Power4.easeIn}, "-=0.4")
-            .to(paintedhands1, 0.8, {opacity:0}, "+=1.2")
-            .to(text2, 0.8, {opacity:0}, "-=0.8")          
-            .to(bg, 2, {backgroundColor:"#00aeef", delay:0.5})
-            .to(spotColor, 2, {fill:"rgb(61, 190, 239)", delay:0.5}, "-=2")
-            .to(cta, 2, {backgroundColor:"#fff", color:"rgb(0, 174, 239)", delay:0.5}, "-=2")
-            .to(text3, 2, {opacity:1, ease:Power4.easeIn}, "-=2")
-            .to(logoColor, 0.8, {fill:"#ffffff", ease:Power4.easeIn}, "-=2")
-            .to(logoText, 0.8, {color:"#ffffff", ease:Power4.easeIn}, "-=2")
-            .to(realhands, 0.8, {opacity:1, ease:Power4.easeIn}, "-=2")
-            .to(hashtag, 0.8, {opacity:1, ease:Power4.easeIn}, "+=0.3")
+           
+            .to(wrect, 0.7, {alpha:0, ease:Linear.easeNone})
+
+    // Frame-1
+            .addLabel("fr", "+=1")
+
+            .to(canvas, 2.6, {opacity:1, ease:Power2.easeOut}, "fr")
+            .to(spot, 2, {opacity:1, ease:Power2.easeOut}, "fr+=0.5")
+            .staggerTo(text1, 1, {opacity:1, ease:Linear.easeNone}, 0.5, "fr+=3")
+            .from(cta, 1.2, {opacity:1, y:"+=80", ease:Power2.easeOut}, "fr+=4.8")
+            .to(cta, 1.2, {opacity:1}, "fr+=4.8")
+
+    // Frame-2 
+    
+            .addLabel("fr2", "+=0.5")  
+
+            .to(canvas, 1.5, {y:"-=200", ease:Back.easeIn}, "fr2+=0.3")
+            .to(text1, 0.8, {opacity:0}, "fr2+=0.3")
+            // .staggerTo(text2, 1, {opacity:1, ease:Linear.easeNone}, 0.5, "fr2+=3")
+            
+            // .to(text1, 0.8, {opacity:0}, "-=0.8")
+            // .to(text2, 0.8, {opacity:1, ease:Power4.easeIn}, "+=0.05")
+            // .to(paintedhands, 0.8, {opacity:1, ease:Power4.easeIn}, "-=0.8")
+            // .to(paintedhands, 0.8, {opacity:0}, "+=0.5")
+            // .to(paintedhands1, 0.8, {opacity:1, ease:Power4.easeIn}, "-=0.4")
+            // .to(paintedhands1, 0.8, {opacity:0}, "+=1.2")
+            // .to(text2, 0.8, {opacity:0}, "-=0.8")          
+            // .to(bg, 2, {backgroundColor:"#00aeef", delay:0.5})
+            // .to(spotColor, 2, {fill:"rgb(61, 190, 239)", delay:0.5}, "-=2")
+            // .to(cta, 2, {backgroundColor:"#fff", color:"rgb(0, 174, 239)", delay:0.5}, "-=2")
+            // .to(text3, 2, {opacity:1, ease:Power4.easeIn}, "-=2")
+            // .to(logoColor, 0.8, {fill:"#ffffff", ease:Power4.easeIn}, "-=2")
+            // .to(logoText, 0.8, {color:"#ffffff", ease:Power4.easeIn}, "-=2")
+            // .to(realhands, 0.8, {opacity:1, ease:Power4.easeIn}, "-=2")
+            // .to(hashtag, 0.8, {opacity:1, ease:Power4.easeIn}, "+=0.3")
  
         }
 };
